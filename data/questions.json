@@ -1,0 +1,32 @@
+[
+    {
+    "id": 1,
+    "questions":
+    [
+        {
+            "q": "Was ist gustatorische Wahrnehmung?",
+            "a": "basiert in erster Linie auf chemischen Reizen und ist mit dem Geschmackssinn verknüpft"
+        },
+        {
+            "q": "Was ist olfaktorische Wahrnehmung?",
+            "a": "Wahrnehmung auf Basis von chemischen Reizen verknüpft mit dem Geruchssinn"
+        },
+        {
+            "q": "Nennen Sie die Kanäle der Wahrnehmung.",
+            "a": "Visuell, auditiv, kinästhetisch, olfaktorisch, gustatorisch"
+        },
+        {
+            "q": "Erklären Sie das Schaubild der Behaltensquoten.",
+            "a": "Lesen 10%, Hören 20%, Sehen 30%, Sehen und Hören 50%, Nacherzählen 70%, Tun 90%"
+        },
+        {
+            "q": "Was ist die Grundlage für 'lebenslanges Lernen'?",
+            "a": "unterrichten, lehren, belehrt werden und lernen"
+        },
+        {
+            "q": "Welchen 'Wandel' hat die Ausbilderrolle hinter sich?",
+            "a": "Ausbilder wandelt vom reinen Wissensvermittler hin zum Lernbegleiter."
+        }
+    ]
+    }
+]
