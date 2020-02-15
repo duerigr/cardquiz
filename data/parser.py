@@ -1,4 +1,6 @@
 import json
+from data.pool import Pool
+from data.question import Question
 
 
 class Parser:
@@ -8,9 +10,17 @@ class Parser:
 
     def parse(self, filename):
         with open("data/"+filename) as jsonfile:
-            self.pools = json.load(jsonfile)
+            rawdata = json.load(jsonfile)
+            for pool in rawdata:
+                questions = []
+                for question in pool["questions"]:
+                    questions.append(Question(question["q"], question["a"]))
+                self.pools.append(Pool(questions))
+
+    def get_pools(self) -> [Pool]:
+        return self.pools
 
     def print(self):
         for pool in self.pools:
-            for question in pool["questions"]:
-                print(question["q"]+" -> "+question["a"])
+            for question in pool.get_questions():
+                print(question.get_question()+" -> "+question.get_answer())
