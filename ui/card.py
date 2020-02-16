@@ -39,3 +39,6 @@ class Card:
         self.flipped = not self.flipped
         return text
 
+    def is_flipped(self):
+        return self.flipped
+

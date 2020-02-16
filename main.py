@@ -1,15 +1,19 @@
 import pygame
+import textwrap
 from pygame.locals import *
 from data.parser import Parser
 from ui.card import Card
 
 
 class Config:
+    debug = False
     black = 0, 0, 0
     white = 255, 255, 255
     red = 255, 0, 0
     green = 0, 255, 0
+    nicegreen = 4, 117, 19
     blue = 0, 0, 255
+    niceblue = 5, 36, 150
     display_height = 768
     display_width = 1280
     card_rect_height = (display_height // 3) - 2
@@ -42,25 +46,30 @@ class Config:
         top_left_b1, top_left_b2, top_left_b3,
         top_left_c1, top_left_c2, top_left_c3
     )
+    font_vars = {
+        "small": (18, 37),
+        "medium": (26, 25),
+        "large": (32, 22)
+    }
 
 
 class Main:
 
     @classmethod
     def init(cls):
+        # set font config
+        cls.fontconfig = Config.font_vars["large"]
+
         cls.parser = Parser()
         cls.parser.parse("questions.json")
         pygame.init()
         cls.screen = pygame.display.set_mode((Config.display_width, Config.display_height))
-        cls.screen.fill(Config.blue)
+        cls.screen.fill(Config.niceblue)
 
         # display cards
-        cls.font = pygame.font.Font("res/MechanicalBold-oOmA.otf", 12)
-        # text_surface = cls.font.render("Lorem ipsum und so weiter und so fort...", True, Config.white)
-        # text_rect = Rect(10, 10, 200, 200)
-        # cls.screen.blit(text_surface, text_rect)
-        # pygame.draw.rect(cls.screen, Config.white, text_rect, 3)
+        cls.font = pygame.font.Font("res/MechanicalBold-oOmA.otf", cls.fontconfig[0])
         pools = cls.parser.get_pools()
+        # TODO select pool
         cls.cards = cls.__draw_cards(pools, 0)
         pygame.display.update()
 
@@ -70,10 +79,11 @@ class Main:
 
         cards = {}
         for i in range(0, len(questions)):
+            rect = Rect(Config.top_left_points[i], (Config.card_rect_width, Config.card_rect_height))
             cards[i] = Card(questions[i].get_question(),
                             questions[i].get_answer(),
-                            Rect(Config.top_left_points[i], (Config.card_rect_width, Config.card_rect_height)),
-                            cls.__render_text(questions[i].get_question(), Config.center_points[i]))
+                            rect,
+                            cls.__render_text(questions[i].get_question(), rect.midtop))
 
         for card in cards.values():
             pygame.draw.rect(cls.screen, Config.white, card.get_rectangle_dimensions(), 1)
@@ -82,10 +92,16 @@ class Main:
 
     @classmethod
     def __render_text(cls, text, center):
-        text_surface = cls.font.render(text, True, Config.white)
-        text_rect = text_surface.get_rect()
-        text_rect.center = (center[0], center[1])
-        cls.screen.blit(text_surface, text_rect)
+        message = textwrap.fill(text, cls.fontconfig[1])
+        lines = message.split("\n")
+        x = center[0]
+        y = center[1] + cls.fontconfig[0]
+        for part in lines:
+            text_surface = cls.font.render(part, True, Config.white)
+            text_rect = text_surface.get_rect()
+            text_rect.center = (x, y)
+            cls.screen.blit(text_surface, text_rect)
+            y += 1.75 * cls.fontconfig[1]
         return text_surface
 
     @classmethod
@@ -99,14 +115,19 @@ class Main:
                     mouse_x, mouse_y = pygame.mouse.get_pos()
                     for card in cls.cards.values():
                         if card.point_in_card_dimensions(mouse_x, mouse_y):
-                            print("clicked card: "+card.get_question())
-                            cls.screen.fill(Config.blue, card.get_rectangle_dimensions())
+                            cls.log("clicked card: "+card.get_question())
+                            cls.screen.fill(Config.niceblue if card.is_flipped() else Config.nicegreen,
+                                            card.get_rectangle_dimensions())
                             pygame.draw.rect(cls.screen, Config.white, card.get_rectangle_dimensions(), 1)
-                            cls.__render_text(card.flip(), card.get_rectangle_dimensions().center)
+                            cls.__render_text(card.flip(), card.get_rectangle_dimensions().midtop)
                             pygame.display.update(card.get_rectangle_dimensions())
 
             #pygame.display.update()
 
+    @classmethod
+    def log(cls, msg):
+        if Config.debug:
+            print(msg)
 
 Main.init()
 Main.main()

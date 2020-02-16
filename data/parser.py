@@ -9,7 +9,7 @@ class Parser:
         self.pools = []
 
     def parse(self, filename):
-        with open("data/"+filename) as jsonfile:
+        with open("data/"+filename, encoding="utf-8") as jsonfile:
             rawdata = json.load(jsonfile)
             for pool in rawdata:
                 questions = []
