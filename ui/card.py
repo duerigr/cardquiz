@@ -48,7 +48,7 @@ class Card:
     def get_fontconfig(self):
         return self.font_config_answer if self.flipped else self.font_config_question
 
-    def __calculate_font_config_for_text(self, fontconfig, fontsetting, text):
+    def __calculate_font_config_for_text(self, fontconfig, fontsetting, text) -> [int, int, [(Surface, Rect)]]:
         cardfontconfig = [fontconfig[0], fontconfig[1], []]
         fitting = False
         while not fitting:
