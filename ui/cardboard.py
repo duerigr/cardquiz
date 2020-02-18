@@ -41,6 +41,9 @@ class Cardboard:
         if self.disabled:
             return
         for event in events:
+            if event.type == QUIT:
+                pygame.quit()
+                quit()
             if event.type == MOUSEBUTTONDOWN:
                 mouse_x, mouse_y = pygame.mouse.get_pos()
                 self.__handle_click(mouse_x, mouse_y, screen)
