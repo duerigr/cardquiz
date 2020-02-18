@@ -1,12 +1,10 @@
 import pygameMenu
-from pygame.display import update, flip
 from ui.config import Config
 
 
 class Menu:
 
     def __init__(self, screen, font, pools, handler):
-        self.screen = screen
         self.menu = pygameMenu.Menu(screen,
                                     Config.display_width,
                                     Config.display_height,
@@ -14,14 +12,14 @@ class Menu:
                                     "Hauptmenü",
                                     bgfun=self.menu_background,
                                     color_selected=Config.white,
-                                    font_color=Config.black,
+                                    font_color=Config.gray,
                                     font_size=30,
                                     font_size_title=40,
                                     menu_alpha=100,
                                     menu_color=Config.niceblue,
                                     option_shadow=False,
                                     )
-        self.menu.add_selector("Pool",
+        self.menu.add_selector("Pool: ",
                                self.__create_pools_options(pools),
                                selector_id="pool",
                                default=0,
@@ -30,9 +28,6 @@ class Menu:
         self.menu.add_option("Ende", pygameMenu.events.EXIT)
 
     def menu_background(self):
-        pass
-
-    def handle_click(self, mouse_x, mouse_y, screen):
         pass
 
     def mainloop(self, events):
