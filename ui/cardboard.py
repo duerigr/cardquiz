@@ -1,13 +1,18 @@
+import pygame
+from pygame.locals import *
+
 from ui.config import Config
 from ui.card import Card
-from pygame.draw import rect
-from pygame.rect import Rect
-from pygame.display import update
 
 
 class Cardboard:
 
-    def __init__(self, pool, fontconfig):
+    def __init__(self, handler):
+        self.disabled = False
+        self.handler = handler
+        self.cards = {}
+
+    def render_all(self, screen, pool, fontconfig):
         questions = pool.get_random_questions(9)
 
         cards = {}
@@ -19,23 +24,40 @@ class Cardboard:
                             fontconfig,
                             Config.font_setting)
         self.cards = cards
-
-    def render_all(self, screen):
+        screen.fill(Config.niceblue)
         for card in self.cards.values():
             self.__render_card(card, screen)
-        update()
+        pygame.display.flip()
+
+    def disable(self, screen):
+        self.disabled = True
+        screen.fill(Config.niceblue)
+
+    def enable(self, screen, pool, fontconfig):
+        self.disabled = False
+        self.render_all(screen, pool, fontconfig)
+
+    def mainloop(self, events, screen):
+        if self.disabled:
+            return
+        for event in events:
+            if event.type == MOUSEBUTTONDOWN:
+                mouse_x, mouse_y = pygame.mouse.get_pos()
+                self.__handle_click(mouse_x, mouse_y, screen)
+            if event.type == KEYDOWN and event.key == K_ESCAPE:
+                self.handler()
 
     def __render_card(self, card: Card, screen):
         screen.fill(Config.niceblue if not card.is_flipped() else Config.nicegreen,
                     card.get_rectangle_dimensions())
-        rect(screen, Config.white, card.get_rectangle_dimensions(), 1)
+        pygame.draw.rect(screen, Config.white, card.get_rectangle_dimensions(), 1)
         fontconfig = card.get_fontconfig()
         for texttuple in fontconfig[2]:
             screen.blit(texttuple[0], texttuple[1])
 
-    def handle_click(self, mouse_x, mouse_y, screen):
+    def __handle_click(self, mouse_x, mouse_y, screen):
         for card in self.cards.values():
             if card.point_in_card_dimensions(mouse_x, mouse_y):
                 card.flip()
                 self.__render_card(card, screen)
-                update(card.get_rectangle_dimensions())
+                pygame.display.update(card.get_rectangle_dimensions())

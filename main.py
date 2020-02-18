@@ -1,9 +1,10 @@
 import pygame
 from pygame.locals import *
+import pygameMenu
 from data.parser import Parser
-from ui.card import Card
 from ui.config import Config
 from ui.cardboard import Cardboard
+from ui.menu import Menu
 
 
 class Main:
@@ -17,29 +18,35 @@ class Main:
         cls.parser.parse("questions.json")
         pygame.init()
         cls.screen = pygame.display.set_mode((Config.display_width, Config.display_height))
-        cls.screen.fill(Config.niceblue)
 
         # display cards
+        cls.screen.fill(Config.niceblue)
         cls.font = pygame.font.Font(Config.font_setting[0], cls.fontconfig[0])
         pools = cls.parser.get_pools()
-        # TODO select pool
 
-        cls.render_object = Cardboard(pools[0], cls.fontconfig)
-        cls.render_object.render_all(cls.screen)
+        cls.cardboard = Cardboard(cls.switch_menu)
+        cls.menu = Menu(cls.screen, Config.font_setting[0], pools, cls.switch_cardboard)
+        pygame.display.flip()
 
         cls.main()
 
     @classmethod
     def main(cls):
-        running = True
-        while running:
-            for event in pygame.event.get():
-                if event.type == QUIT:
-                    running = False
-                elif event.type == MOUSEBUTTONDOWN:
-                    mouse_x, mouse_y = pygame.mouse.get_pos()
-                    cls.render_object.handle_click(mouse_x, mouse_y, cls.screen)
+        while True:
+            events = pygame.event.get()
+            cls.menu.mainloop(events)
+            cls.cardboard.mainloop(events, cls.screen)
         cls.quit()
+
+    @classmethod
+    def switch_cardboard(cls, get_pool_id):
+        cls.menu.disable()
+        cls.cardboard.enable(cls.screen, cls.parser.get_pool(get_pool_id()), cls.fontconfig)
+
+    @classmethod
+    def switch_menu(cls):
+        cls.cardboard.disable(cls.screen)
+        cls.menu.enable()
 
     @classmethod
     def quit(cls):
