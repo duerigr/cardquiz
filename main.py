@@ -2,6 +2,8 @@ import pygame
 from pygame.locals import *
 import pygameMenu
 from data.parser import Parser
+from ui.card import Card
+from ui.carddisplay import Carddisplay
 from ui.config import Config
 from ui.cardboard import Cardboard
 from ui.menu import Menu
@@ -19,12 +21,12 @@ class Main:
         pygame.init()
         cls.screen = pygame.display.set_mode((Config.display_width, Config.display_height))
 
-        # display cards
         cls.screen.fill(Config.niceblue)
         cls.font = pygame.font.Font(Config.font_setting[0], cls.fontconfig[0])
         pools = cls.parser.get_pools()
 
-        cls.cardboard = Cardboard(cls.switch_menu, pools, cls.font, cls.fontconfig,
+        cls.cardisplay = Carddisplay(cls.switch_cardboard, (cls.screen.get_width(), cls.screen.get_height()))
+        cls.cardboard = Cardboard(cls.switch_menu, cls.switch_carddisplay, pools, cls.font, cls.fontconfig,
                                   (cls.screen.get_width(), cls.screen.get_height()))
         cls.menu = Menu(cls.screen, Config.font_setting[0], cls.switch_cardboard)
         pygame.display.flip()
@@ -37,17 +39,26 @@ class Main:
             events = pygame.event.get()
             cls.menu.mainloop(events)
             cls.cardboard.mainloop(events, cls.screen)
+            cls.cardisplay.mainloop(events)
         cls.quit()
 
     @classmethod
     def switch_cardboard(cls):
         cls.menu.disable()
         cls.cardboard.enable(cls.screen)
+        cls.cardisplay.disable()
 
     @classmethod
     def switch_menu(cls):
         cls.cardboard.disable(cls.screen)
         cls.menu.enable()
+        cls.cardisplay.disable()
+
+    @classmethod
+    def switch_carddisplay(cls, card: Card):
+        cls.cardboard.disable(cls.screen)
+        cls.menu.disable()
+        cls.cardisplay.enable(cls.screen, card)
 
     @classmethod
     def quit(cls):

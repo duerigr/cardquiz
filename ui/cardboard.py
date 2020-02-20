@@ -7,9 +7,10 @@ from ui.card import Card
 
 class Cardboard:
 
-    def __init__(self, handler, pools, font, fontconfig, screensize):
+    def __init__(self, menuhandler, displayhandler, pools, font, fontconfig, screensize):
         self.disabled = False
-        self.handler = handler
+        self.menuhandler = menuhandler
+        self.displayhandler = displayhandler
         self.cards = {}
         self.pools = pools
         self.font = font
@@ -49,15 +50,15 @@ class Cardboard:
                 mouse_x, mouse_y = pygame.mouse.get_pos()
                 self.__handle_click(mouse_x, mouse_y, screen)
             if event.type == KEYDOWN and event.key == K_ESCAPE:
-                self.handler()
+                self.menuhandler()
 
-    def __render_card(self, card: Card, screen):
-        screen.fill(Config.niceblue if not card.is_flipped() else Config.nicegreen,
-                    card.get_rectangle_dimensions())
-        pygame.draw.rect(screen, Config.white, card.get_rectangle_dimensions(), 1)
+    def __render_card(self, card: Card, surface):
+        surface.fill(Config.niceblue if not card.is_flipped() else Config.nicegreen,
+                     card.get_rectangle_dimensions())
+        pygame.draw.rect(surface, Config.white, card.get_rectangle_dimensions(), 1)
         fontconfig = card.get_fontconfig()
         for texttuple in fontconfig[2]:
-            screen.blit(texttuple[0], texttuple[1])
+            surface.blit(texttuple[0], texttuple[1])
 
     def __render_pool_headings(self, screen):
         screen_width = screen.get_width()
@@ -76,15 +77,18 @@ class Cardboard:
     def __handle_click(self, mouse_x, mouse_y, screen):
         for card in self.cards.values():
             if card.point_in_card_dimensions(mouse_x, mouse_y):
-                card.flip()
-                self.__render_card(card, screen)
-                pygame.display.update(card.get_rectangle_dimensions())
+                # card.~()
+                # self.__render_card(card, screen)
+                # pygame.display.update(card.get_rectangle_dimensions())
+                self.displayhandler(card)
 
     def __init_cards(self, fontconfig, screensize):
         screen_width = screensize[0]
         width_step = screen_width // 21
         screen_height = screensize[1]
         height_step = screen_height // 14
+        display = Rect(0, 0, screen_width // 2, screen_height // 2)
+        # display.center = (screen_width // 2, screen_height // 2)
         pools = sorted(self.pools, key=lambda e: e.get_points())
 
         top_x = 2 * width_step
@@ -97,6 +101,7 @@ class Cardboard:
                 self.cards[(p.get_points(), i)] = Card(questions[i].get_question(),
                                                        questions[i].get_answer(),
                                                        rectangle,
+                                                       display,
                                                        fontconfig,
                                                        Config.font_setting,
                                                        Config.row_colors[i])
