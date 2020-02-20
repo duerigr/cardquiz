@@ -15,7 +15,7 @@ class Parser:
                 questions = []
                 for question in pool["questions"]:
                     questions.append(Question(question["q"], question["a"]))
-                self.pools.append(Pool(questions, pool["id"], pool["name"]))
+                self.pools.append(Pool(questions, pool["id"], pool["name"], pool["points"]))
 
     def get_pools(self) -> [Pool]:
         return self.pools

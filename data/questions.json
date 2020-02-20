@@ -1,7 +1,8 @@
 [
     {
         "id": 1,
-        "name": "Einsteigerfragen",
+        "name": "sehr leicht",
+        "points": 3,
         "questions":
         [
             {
@@ -44,7 +45,8 @@
     },
     {
         "id": 2,
-        "name": "Gute Fragen",
+        "name": "leicht",
+        "points": 10,
         "questions":
         [
             {
@@ -82,6 +84,138 @@
             {
                 "q": "Pool 2: Lorem ipsum question",
                 "a": "Pool 2: Lorem ipsum answer"
+            }
+        ]
+    },
+    {
+        "id": 3,
+        "name": "mittelschwer",
+        "points": 20,
+        "questions":
+        [
+            {
+                "q": "Pool 3: Was ist gustatorische Wahrnehmung?",
+                "a": "Pool 3: basiert in erster Linie auf chemischen Reizen und ist mit dem Geschmackssinn verknüpft"
+            },
+            {
+                "q": "Pool 3: Was ist olfaktorische Wahrnehmung?",
+                "a": "Pool 3: Wahrnehmung auf Basis von chemischen Reizen verknüpft mit dem Geruchssinn"
+            },
+            {
+                "q": "Pool 3: Nennen Sie die Kanäle der Wahrnehmung.",
+                "a": "Pool 3: Visuell, auditiv, kinästhetisch, olfaktorisch, gustatorisch"
+            },
+            {
+                "q": "Pool 3: Erklären Sie das Schaubild der Behaltensquoten.",
+                "a": "Pool 3: Lesen 10%, Hören 20%, Sehen 30%, Sehen und Hören 50%, Nacherzählen 70%, Tun 90%"
+            },
+            {
+                "q": "Pool 3: Was ist die Grundlage für 'lebenslanges Lernen'?",
+                "a": "Pool 3: unterrichten, lehren, belehrt werden und lernen"
+            },
+            {
+                "q": "Pool 3: Welchen 'Wandel' hat die Ausbilderrolle hinter sich?",
+                "a": "Pool 3: Ausbilder wandelt vom reinen Wissensvermittler hin zum Lernbegleiter."
+            },
+            {
+                "q": "Pool 3: Lorem ipsum question",
+                "a": "Pool 3: A: Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam and so on and so on ... stuff blablabla afkl sdf dsgfsre gsdg sd tgewg e ge sgesgsgre"
+            },
+            {
+                "q": "Pool 3: Q: Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam",
+                "a": "Pool 3: A: Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam"
+            },
+            {
+                "q": "Pool 3: Lorem ipsum question",
+                "a": "Pool 3: Lorem ipsum answer"
+            }
+        ]
+    },
+    {
+        "id": 4,
+        "name": "schwer",
+        "points": 30,
+        "questions":
+        [
+            {
+                "q": "Pool 4: Was ist gustatorische Wahrnehmung?",
+                "a": "Pool 4: basiert in erster Linie auf chemischen Reizen und ist mit dem Geschmackssinn verknüpft"
+            },
+            {
+                "q": "Pool 4: Was ist olfaktorische Wahrnehmung?",
+                "a": "Pool 4: Wahrnehmung auf Basis von chemischen Reizen verknüpft mit dem Geruchssinn"
+            },
+            {
+                "q": "Pool 4: Nennen Sie die Kanäle der Wahrnehmung.",
+                "a": "Pool 4: Visuell, auditiv, kinästhetisch, olfaktorisch, gustatorisch"
+            },
+            {
+                "q": "Pool 4: Erklären Sie das Schaubild der Behaltensquoten.",
+                "a": "Pool 4: Lesen 10%, Hören 20%, Sehen 30%, Sehen und Hören 50%, Nacherzählen 70%, Tun 90%"
+            },
+            {
+                "q": "Pool 4: Was ist die Grundlage für 'lebenslanges Lernen'?",
+                "a": "Pool 4: unterrichten, lehren, belehrt werden und lernen"
+            },
+            {
+                "q": "Pool 4: Welchen 'Wandel' hat die Ausbilderrolle hinter sich?",
+                "a": "Pool 4: Ausbilder wandelt vom reinen Wissensvermittler hin zum Lernbegleiter."
+            },
+            {
+                "q": "Pool 4: Lorem ipsum question",
+                "a": "Pool 4: A: Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam and so on and so on ... stuff blablabla afkl sdf dsgfsre gsdg sd tgewg e ge sgesgsgre"
+            },
+            {
+                "q": "Pool 4: Q: Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam",
+                "a": "Pool 4: A: Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam"
+            },
+            {
+                "q": "Pool 4: Lorem ipsum question",
+                "a": "Pool 4: Lorem ipsum answer"
+            }
+        ]
+    },
+    {
+        "id": 5,
+        "name": "ultraschwer",
+        "points": 40,
+        "questions":
+        [
+            {
+                "q": "Pool 5: Was ist gustatorische Wahrnehmung?",
+                "a": "Pool 5: basiert in erster Linie auf chemischen Reizen und ist mit dem Geschmackssinn verknüpft"
+            },
+            {
+                "q": "Pool 5: Was ist olfaktorische Wahrnehmung?",
+                "a": "Pool 5: Wahrnehmung auf Basis von chemischen Reizen verknüpft mit dem Geruchssinn"
+            },
+            {
+                "q": "Pool 5: Nennen Sie die Kanäle der Wahrnehmung.",
+                "a": "Pool 5: Visuell, auditiv, kinästhetisch, olfaktorisch, gustatorisch"
+            },
+            {
+                "q": "Pool 5: Erklären Sie das Schaubild der Behaltensquoten.",
+                "a": "Pool 5: Lesen 10%, Hören 20%, Sehen 30%, Sehen und Hören 50%, Nacherzählen 70%, Tun 90%"
+            },
+            {
+                "q": "Pool 5: Was ist die Grundlage für 'lebenslanges Lernen'?",
+                "a": "Pool 5: unterrichten, lehren, belehrt werden und lernen"
+            },
+            {
+                "q": "Pool 5: Welchen 'Wandel' hat die Ausbilderrolle hinter sich?",
+                "a": "Pool 5: Ausbilder wandelt vom reinen Wissensvermittler hin zum Lernbegleiter."
+            },
+            {
+                "q": "Pool 5: Lorem ipsum question",
+                "a": "Pool 5: A: Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam and so on and so on ... stuff blablabla afkl sdf dsgfsre gsdg sd tgewg e ge sgesgsgre"
+            },
+            {
+                "q": "Pool 5: Q: Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam",
+                "a": "Pool 5: A: Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam"
+            },
+            {
+                "q": "Pool 5: Lorem ipsum question",
+                "a": "Pool 5: Lorem ipsum answer"
             }
         ]
     }

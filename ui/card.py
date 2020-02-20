@@ -4,13 +4,15 @@ from pygame import Rect, Surface, font
 
 class Card:
 
-    def __init__(self, question: str, answer: str, rectangle_dimensions: Rect, fontconfig, fontsetting):
+    def __init__(self, question: str, answer: str, rectangle_dimensions: Rect, fontconfig, fontsetting, color):
         self.flipped = False
         self.question = question
         self.answer = answer
         self.rectangle_dimensions = rectangle_dimensions
         self.font_config_question = self.__calculate_font_config_for_text(fontconfig, fontsetting, self.question)
         self.font_config_answer = self.__calculate_font_config_for_text(fontconfig, fontsetting, self.answer)
+        self.color = color
+        self.solved = None
 
     def get_question(self):
         return self.question
@@ -29,6 +31,15 @@ class Card:
 
     def set_answer(self, answer):
         self.question = answer
+
+    def get_color(self):
+        return self.color
+
+    def set_solved(self, solved):
+        self.solved = solved
+
+    def is_solved(self):
+        return self.solved
 
     def point_in_card_dimensions(self, x, y):
         return self.rectangle_dimensions.topleft[0] < x < self.rectangle_dimensions.topright[0] and \

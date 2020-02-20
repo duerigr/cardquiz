@@ -24,8 +24,9 @@ class Main:
         cls.font = pygame.font.Font(Config.font_setting[0], cls.fontconfig[0])
         pools = cls.parser.get_pools()
 
-        cls.cardboard = Cardboard(cls.switch_menu)
-        cls.menu = Menu(cls.screen, Config.font_setting[0], pools, cls.switch_cardboard)
+        cls.cardboard = Cardboard(cls.switch_menu, pools, cls.font, cls.fontconfig,
+                                  (cls.screen.get_width(), cls.screen.get_height()))
+        cls.menu = Menu(cls.screen, Config.font_setting[0], cls.switch_cardboard)
         pygame.display.flip()
 
         cls.main()
@@ -39,9 +40,9 @@ class Main:
         cls.quit()
 
     @classmethod
-    def switch_cardboard(cls, get_pool_id):
+    def switch_cardboard(cls):
         cls.menu.disable()
-        cls.cardboard.enable(cls.screen, cls.parser.get_pool(get_pool_id()), cls.fontconfig)
+        cls.cardboard.enable(cls.screen)
 
     @classmethod
     def switch_menu(cls):

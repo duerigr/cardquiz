@@ -4,7 +4,7 @@ from ui.config import Config
 
 class Menu:
 
-    def __init__(self, screen, font, pools, handler):
+    def __init__(self, screen, font, handler):
         self.menu = pygameMenu.Menu(screen,
                                     Config.display_width,
                                     Config.display_height,
@@ -19,12 +19,7 @@ class Menu:
                                     menu_color=Config.niceblue,
                                     option_shadow=False,
                                     )
-        self.menu.add_selector("Pool: ",
-                               self.__create_pools_options(pools),
-                               selector_id="pool",
-                               default=0,
-                               onchange=self.__pool_changed)
-        self.menu.add_option("Start", handler, self.__get_selected_pool)
+        self.menu.add_option("Start", handler)
         self.menu.add_option("Ende", pygameMenu.events.EXIT)
 
     def menu_background(self):
@@ -38,17 +33,3 @@ class Menu:
 
     def enable(self):
         self.menu.enable()
-
-    def __create_pools_options(self, pools):
-        options = []
-        for pool in pools:
-            options.append((pool.get_name(), pool.get_id()))
-
-        self.pool = options[0]
-        return options
-
-    def __pool_changed(self, value, pool_id):
-        self.pool = pool_id
-
-    def __get_selected_pool(self):
-        return self.pool

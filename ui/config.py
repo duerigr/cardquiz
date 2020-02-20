@@ -4,11 +4,15 @@ class Config:
     black = 0, 0, 0
     white = 255, 255, 255
     gray = 154, 157, 161
+    lightgray = 200, 200, 200
     red = 255, 0, 0
     green = 0, 255, 0
     nicegreen = 4, 117, 19
     blue = 0, 0, 255
     niceblue = 5, 36, 150
+    yellow = 235, 232, 52
+    pink = 235, 52, 195
+    row_colors = (yellow, red, niceblue, nicegreen, pink)
     display_height = 768
     display_width = 1280
     card_rect_height = (display_height // 3) - 2
