@@ -1,7 +1,6 @@
 import pygame
 from pygame.locals import *
 from ui.config import Config
-from ui.card import Card
 
 
 class Carddisplay(pygame.sprite.Sprite):
@@ -78,7 +77,9 @@ class Carddisplay(pygame.sprite.Sprite):
     def handle_correct_click(self):
         if self.card is not None:
             self.card.set_solved(True)
+        self.cardboardhandler()
 
     def handle_wrong_click(self):
         if self.card is not None:
             self.card.set_solved(False)
+        self.cardboardhandler()
