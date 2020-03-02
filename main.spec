@@ -8,7 +8,11 @@ a = Analysis(['main.py'],
              binaries=[],
              datas=[
                 ('data/questions.json', 'data'),
-                ('res/MechanicalBold-oOmA.otf', 'res')
+                ('res/MechanicalBold-oOmA.otf', 'res'),
+                ('res/cancel.png', 'res'),
+                ('res/confirmed.png', 'res'),
+                ('res/contract.png', 'res'),
+                ('res/anticlockwise-rotation.png', 'res')
              ],
              hiddenimports=[],
              hookspath=[],
