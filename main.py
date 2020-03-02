@@ -26,8 +26,6 @@ class Main:
         cls.pools = cls.parser.get_pools()
 
         cls.cardisplay = Carddisplay(cls.switch_cardboard, (cls.screen.get_width(), cls.screen.get_height()))
-        cls.cardboard = Cardboard(cls.switch_menu, cls.switch_carddisplay, cls.pools, cls.font, cls.fontconfig,
-                                  (cls.screen.get_width(), cls.screen.get_height()))
         cls.menu = Menu(cls.screen, Config.font_setting[0], cls.switch_cardboard_new, cls.switch_cardboard)
         pygame.display.flip()
 
