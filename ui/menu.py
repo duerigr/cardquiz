@@ -4,7 +4,7 @@ from ui.config import Config
 
 class Menu:
 
-    def __init__(self, screen, font, handler):
+    def __init__(self, screen, font, handler_start, handler_continue):
         self.menu = pygameMenu.Menu(screen,
                                     Config.display_width,
                                     Config.display_height,
@@ -19,7 +19,8 @@ class Menu:
                                     menu_color=Config.niceblue,
                                     option_shadow=False,
                                     )
-        self.menu.add_option("Start", handler)
+        self.menu.add_option("Start", handler_start)
+        self.menu.add_option("Weiter", handler_continue)
         self.menu.add_option("Ende", pygameMenu.events.EXIT)
 
     def menu_background(self):

@@ -23,12 +23,12 @@ class Main:
 
         cls.screen.fill(Config.niceblue)
         cls.font = pygame.font.Font(Config.font_setting[0], cls.fontconfig[0])
-        pools = cls.parser.get_pools()
+        cls.pools = cls.parser.get_pools()
 
         cls.cardisplay = Carddisplay(cls.switch_cardboard, (cls.screen.get_width(), cls.screen.get_height()))
-        cls.cardboard = Cardboard(cls.switch_menu, cls.switch_carddisplay, pools, cls.font, cls.fontconfig,
+        cls.cardboard = Cardboard(cls.switch_menu, cls.switch_carddisplay, cls.pools, cls.font, cls.fontconfig,
                                   (cls.screen.get_width(), cls.screen.get_height()))
-        cls.menu = Menu(cls.screen, Config.font_setting[0], cls.switch_cardboard)
+        cls.menu = Menu(cls.screen, Config.font_setting[0], cls.switch_cardboard_new, cls.switch_cardboard)
         pygame.display.flip()
 
         cls.main()
@@ -41,6 +41,14 @@ class Main:
             cls.cardboard.mainloop(events, cls.screen)
             cls.cardisplay.mainloop(events)
         cls.quit()
+
+    @classmethod
+    def switch_cardboard_new(cls):
+        cls.menu.disable()
+        cls.cardboard = Cardboard(cls.switch_menu, cls.switch_carddisplay, cls.pools, cls.font, cls.fontconfig,
+                                  (cls.screen.get_width(), cls.screen.get_height()))
+        cls.cardboard.enable(cls.screen)
+        cls.cardisplay.disable()
 
     @classmethod
     def switch_cardboard(cls):

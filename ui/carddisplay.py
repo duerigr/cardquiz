@@ -10,10 +10,22 @@ class Carddisplay(pygame.sprite.Sprite):
         self.surf = pygame.Surface((screensize[0] // 2, screensize[1] // 2))
         self.rect = self.surf.get_rect()
         self.rect.center = (screensize[0] // 2, screensize[1] // 2)
-        self.rect_close = Rect(self.rect.x + self.rect.width - 22, self.rect.y + 2, 20, 20)
-        self.rect_correct = Rect(self.rect.x + 2, self.rect.y + self.rect.height - 32, 30, 30)
-        self.rect_wrong = Rect(self.rect.x + self.rect.width - 32, self.rect.y + self.rect.height - 32, 30, 30)
+        self.rect_close = Rect(self.rect.x + self.rect.width - 32, self.rect.y + 2, 30, 30)
+        self.surf_close = pygame.transform.scale(
+            pygame.image.load(Config.icon_close).convert_alpha(),
+            (self.rect_close.width, self.rect_close.height))
+        self.rect_correct = Rect(self.rect.center[0] - 64, self.rect.y + self.rect.height - 32, 30, 30)
+        self.surf_correct = pygame.transform.scale(
+            pygame.image.load(Config.icon_correct).convert_alpha(),
+            (self.rect_correct.width, self.rect_correct.height))
+        self.rect_wrong = Rect(self.rect.center[0] + 32, self.rect.y + self.rect.height - 32, 30, 30)
+        self.surf_wrong = pygame.transform.scale(
+            pygame.image.load(Config.icon_wrong).convert_alpha(),
+            (self.rect_wrong.width, self.rect_wrong.height))
         self.rect_flip = Rect(self.rect.x + 2, self.rect.y + 2, 30, 30)
+        self.surf_flip = pygame.transform.scale(
+            pygame.image.load(Config.icon_flip).convert_alpha(),
+            (self.rect_flip.width, self.rect_flip.height))
         self.disabled = False
         self.cardboardhandler = cardboardhandler
         self.card = None
@@ -36,10 +48,10 @@ class Carddisplay(pygame.sprite.Sprite):
             return
         self.surf.fill(Config.niceblue if not self.card.is_flipped() else Config.nicegreen)
         pygame.draw.rect(self.surf, Config.white, Rect(0, 0, self.rect.width, self.rect.height), 2)
-        pygame.draw.rect(self.surf, Config.red, Rect(self.rect.width - 22, 2, 20, 20))
-        pygame.draw.rect(self.surf, Config.green, Rect(2, self.rect.height - 32, 30, 30))
-        pygame.draw.rect(self.surf, Config.yellow, Rect(self.rect.width - 32, self.rect.height - 32, 30, 30))
-        pygame.draw.rect(self.surf, Config.pink, Rect(2, 2, 30, 30))
+        self.surf.blit(self.surf_close, Rect(self.rect.width - 32, 2, 30, 30))
+        self.surf.blit(self.surf_correct, Rect((self.rect.width // 2) - 64, self.rect.height - 32, 30, 30))
+        self.surf.blit(self.surf_wrong, Rect((self.rect.width // 2) + 32, self.rect.height - 32, 30, 30))
+        self.surf.blit(self.surf_flip, Rect(2, 2, 30, 30))
         fontconfig = self.card.get_fontconfig()
         for texttuple in fontconfig[2]:
             self.surf.blit(texttuple[0], texttuple[1])

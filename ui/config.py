@@ -51,3 +51,7 @@ class Config:
         "large": (32, 22)
     }
     font_setting = ("res/MechanicalBold-oOmA.otf", white)
+    icon_close = "res/contract.png"
+    icon_correct = "res/confirmed.png"
+    icon_wrong = "res/cancel.png"
+    icon_flip = "res/anticlockwise-rotation.png"
